@@ -1,0 +1,71 @@
+contentType: Card
+UserActions:
+  cardId: !!int 34
+  hasNotifications: !!bool false
+  isIsoloated: !!bool false
+  maxItems: !!int 3
+  pinnable: !!bool true
+title: Stock Overview
+name: stock-overview
+CollectionModeField: null
+MaxItemsField: null
+PriorityField: null
+StreamSource: null
+CardComponent: stock-overview/stock-overview-card
+StoreMetadataField: null
+CommonPart:
+  Owner: !!int 2
+  Container: null
+  CreatedUtc: 2019-06-11T09:51:43.9334331Z
+  PublishedUtc: 2019-06-11T09:51:43.9584527Z
+  ModifiedUtc: 2019-06-11T09:51:43.9334331Z
+  VersionCreatedUtc: 2019-06-11T09:51:43.9334331Z
+  VersionPublishedUtc: 2019-06-11T09:51:43.9584527Z
+  VersionModifiedUtc: 2019-06-11T09:51:43.9334331Z
+ServicePart:
+  ConnectorTypeName: ScriptConnector
+  ConnectorTypeId: !!int 33
+  ConnectorName: iex-cloud
+  ServiceName: stock-overview
+  Url: ~/api/adenin.GateKeeper.Connector/iex-cloud/stock-overview
+  ServiceParameters: '{}'
+SearchContextPart:
+  Query: null
+  Interface: null
+CommandPart:
+  CommandType: None
+  Command: 
+  DefaultDate: null
+  Intent: null
+  Ext: {}
+AppPart:
+  App: null
+  Url: 
+  ExtUrl: 
+  Priority: !!int 0
+  AppFaceId: !!int 0
+  Category: orange
+  Icon: now:search
+  CSSClasses: null
+  Enabled: !!bool false
+  NewWindow: !!bool false
+  UrlWithId: !!bool true
+  AvailableAppFaceRecords: null
+  HasPattern: !!bool false
+RoleViewPermissionsPart:
+  AllowedRoles: []
+  Audiences:
+    - Authenticated
+  Mandatory: False
+RecurringTaskPart:
+  Schedule: '- - - - -'
+  ActivityType: adenin.Now.Activities.CardTask.UpdateCard
+  StartDateUtc: null
+  EndDateUtc: null
+  NextOccurrenceUtc: null
+  Priority: !!int 5
+  Status: Enabled
+  NowFlag: 0
+  LastExecutionUTC: null
+  EnableWebHook: !!bool false
+  WebHookToken: null

@@ -1,0 +1,342 @@
+$type: card
+rules: []
+properties:
+  title:
+    type: element
+    xtype: at-carbon-card-title
+    title: Basic Card Sample
+    xgridcols: 12
+    xstyle: 
+    xclass: 
+    actionListeners:
+      - _start
+  content:
+    type: element
+    xtype: at-core-view
+    model: 
+    view: |
+      <div class="container layout-horizontal m">
+      	<div id="trend" class="pxsm">
+      		{% if quote.change > 0 %} <!--green-->
+      		<iron-image sizing="cover" src="{{ '/stock-overview/Stock_up.svg' | component_url }}" style="width: 14px; height:36px;"></iron-image>
+      		{% elsif quote.change < 0 %} <!--red-->
+      		<iron-image sizing="cover" src="{{ '/stock-overview/Stock_down.svg' | component_url }}" style="width: 14px; height:36px;"></iron-image>
+      		{% elsif quote.extendedChange > 0 %} <!--green-->
+      		<iron-image sizing="cover" src="{{ '/stock-overview/Stock_up.svg' | component_url }}" style="width: 14px; height:36px;"></iron-image>
+          {% elsif quote.extendedChange < 0 %} <!--red-->
+          <iron-image sizing="cover" src="{{ '/stock-overview/Stock_down.svg' | component_url }}" style="width: 14px; height:36px;"></iron-image>
+          {% else %} <!--grey-->
+          <!--<at-carbon-icon class="grey" icon="now:horizontal-line" width="36px" height="14px" style="position: relative; top: 2px;"></at-carbon-icon>-->
+          {% endif %}
+        </div>
+        <div class="layout-vertical"> 
+          <div class="layout-horizontal">
+            <div class="mlsm mr"><span class="font-headline secondary font-bold" style="">{{ quote.symbol }}</span></div>
+            <div class="layout-flex layout-self-end desktop-only">
+              <span class="mrsm font-title text-primary">{{ quote.latestPrice }}</span>
+      				{% if quote.change > 0 %} <!--green-->
+              <span class="font-title green">{{ quote.change }} ({{ quote.changePercent }}%)</span>
+              {% elsif quote.change < 0 %} <!--red-->
+              <span class="font-title red">{{ quote.change }} ({{ quote.changePercent }}%)</span>
+              {% elsif quote.extendedChange > 0 %} <!--green-->
+              <span class="font-title green">{{ quote.extendedChange }} ({{ quote.extendedChangePercent }}%)</span>
+              {% elsif quote.extendedChange < 0 %} <!--red-->
+              <span class="font-title red">{{ quote.extendedChange }} ({{ quote.extendedChangePercent }}%)</span>
+              {% else %} <!--grey-->
+              <span class="font-title text-secondary">{{ quote.extendedChange }} ({{ quote.extendedChangePercent }}%)</span>
+              {% endif %}
+            </div>
+            <div class="layout-flex layout-self-end mobile-only">
+              <span class="mrsm font-subhead text-primary">{{ quote.latestPrice }}</span>
+              {% if quote.extendedChange > 0 %} <!--green-->
+              <span class="font-subhead green">{{ quote.extendedChange }} ({{ quote.extendedChangePercent }}%)</span>
+              {% elsif quote.extendedChange < 0 %} <!--red-->
+              <span class="font-subhead red">{{ quote.extendedChange }} ({{ quote.extendedChangePercent }}%)</span>
+              {% else %} <!--grey-->
+              <span class="font-subhead text-secondary">0 (0%)</span>
+              {% endif %}
+            </div>
+          </div>
+          <at-carbon-moment class="mlsm text-secondary font-caption" datetime="{{ quote.date }}" from-now ago auto-refresh></at-carbon-moment>
+        </div>
+      </div>
+    xgridcols: 12
+    xstyle: 
+    xclass: 
+    actionListeners:
+      - _all
+    default: 
+    modelRoot: state.model
+  core6:
+    type: element
+    title: Charts 6
+    xtype: at-chart-core
+    actionListeners:
+      - _all
+    xclass: expanded-only
+  view6:
+    type: element
+    title: Liquid View 6
+    xtype: at-core-view
+    view: |-
+      <div class="bb mx my expanded-only"></div>
+      <div class="mx my expanded-only font-title">Market News</div>
+    modelRoot: state.model
+  vlist4:
+    type: element
+    xtype: at-core-vlist
+    modelRoot: state.model.news
+    listHeight: 300px
+    itemComponent: stock-overview/stock-overview-item-card
+    actionListeners:
+      - _all
+    xclass: expanded-only
+  footer4:
+    type: element
+    title: Card Footer 4
+    xtype: at-carbon-card-footer
+    xgridcols: 12
+    expandable: !!bool true
+$meta:
+  cardId: !!int 34
+  preview-data: |-
+    {
+      "quote": {
+        "symbol": "CSCO",
+        "companyName": "Cisco Systems, Inc.",
+        "calculationPrice": "tops",
+        "open": 56.82,
+        "openTime": 1560259800554,
+        "close": 56.42,
+        "closeTime": 1560196800175,
+        "high": 57.56,
+        "low": 56.73,
+        "latestPrice": 57.255,
+        "latestSource": "IEX real time price",
+        "latestTime": "11:11:18 AM",
+        "latestUpdate": 1560265878991,
+        "latestVolume": 8604748,
+        "iexRealtimePrice": 57.255,
+        "iexRealtimeSize": 17,
+        "iexLastUpdated": 1560265878991,
+        "delayedPrice": 57.2,
+        "delayedPriceTime": 1560264983848,
+        "extendedPrice": 56.82,
+        "extendedChange": -0.435,
+        "extendedChangePercent": -0.0076,
+        "extendedPriceTime": 1560259800442,
+        "previousClose": 56.42,
+        "change": 0.835,
+        "changePercent": 0.0148,
+        "iexMarketPercent": 0.024761561872584763,
+        "iexVolume": 213067,
+        "avgTotalVolume": 22289737,
+        "iexBidPrice": 57.25,
+        "iexBidSize": 200,
+        "iexAskPrice": 58.48,
+        "iexAskSize": 100,
+        "marketCap": 245093196150,
+        "peRatio": 19.61,
+        "week52High": 57.56,
+        "week52Low": 40.25,
+        "ytdChange": 0.32842,
+        "date": "2019-06-11T15:11:18.991Z"
+      },
+      "news": {
+        "_page": 1,
+        "_pageSize": 99,
+        "items": [
+          {
+            "title": "Intel is buying Barefoot Networks, a challenger to Cisco that had raised over $150 million from giants like Google and Alibaba (INTC, CSCO, AVGO)",
+            "description": "Intel is buying Barefoot Networks, a Silicon Valley startup with over $150 million in funding. Terms of the deal were not disclosed. Barefoot Networks sells networking equipment, with its main differentiator being that developers can write code for its hardware that runs directly on the processor — a technical, but important, difference that allows for more customization than you often find on Cisco or Broadcom gear. The deal comes as Intel faces new challenges, as its data center revenues recently faltered for the first time in a long time. Visit Business Insider's homepage for more stories. Intel is acquiring Barefoot Networks, a Silicon Valley startup that had raised over $150 million from giants like Google , Dell Technologies Capital, Alibaba , and Goldman Sachs. Terms of the deal weren't disclosed, but Intel says that Dr. Craig Barratt, the CEO, and his team will be joining the chip giant after the deal closes, which it expects will happen in the third quarter of 2019. \"Upon close, the addition of Barefoot Networks will support our focus on end-to-end cloud networking and infrastructure leadership, and will allow Intel to continue to deliver on new workloads, experiences and capabilities for our data center customers,\" Intel data center boss Navin Shenoy said in a blog entry announcing the deal .",
+            "link": "https://cloud.iexapis.com/v1/news/article/d2e7434e-659d-4436-8ae4-0ddcba148903",
+            "date": "2019-06-11T00:56:58Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/d2e7434e-659d-4436-8ae4-0ddcba148903",
+            "source": "Business Insider",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "Cisco Makes Networks Smarter With Artificial Intelligence, Machine Learning",
+            "description": "Cisco unveiled a new version of its flagship Cisco DNA corporate networking software, adding new artificial intelligence and machine learning capability to managing networks.",
+            "link": "https://cloud.iexapis.com/v1/news/article/562739fd-5258-4d2a-bcfd-3564c15b52a7",
+            "date": "2019-06-10T17:30:00Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/562739fd-5258-4d2a-bcfd-3564c15b52a7",
+            "source": "Barron's",
+            "lang": "en",
+            "hasPaywall": true
+          },
+          {
+            "title": "The Zacks Analyst Blog Highlights: Microsoft, Cisco, Merck and Chevron",
+            "description": "The Zacks Analyst Blog Highlights: Microsoft, Cisco, Merck and Chevron",
+            "link": "https://cloud.iexapis.com/v1/news/article/aa34be80-045e-45ff-8ef9-e9cc99c89baa",
+            "date": "2019-06-10T13:48:00Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/aa34be80-045e-45ff-8ef9-e9cc99c89baa",
+            "source": "Zacks Investment Research",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "Salesforce is acquiring data-visualization company Tableau in a mega $15.7 billion deal (CRM, DATA)",
+            "description": "Salesforce is acquiring Tableau, a publicly-traded data visualization company, for $15.7 billion. Tableau's price tag makes it considerably more expensive than Salesforce's last mega-acquisition of Mulesoft for $6.5 billion in March 2018. Visit Business Insider's homepage for more stories. Salesforce is acquiring Tableau, a publicly traded company that sells data visualization software, in a $15.7 billion deal announced early Monday. Tableau, run by CEO Adam Selipsky, has long been viewed as an acquisition target for Salesforce, which has used large scale acquisitions to build out its product suite and surge toward its long-term revenue goals. Tableau's data analytics and visualization platform has 86,000 customers, including Charles Schwab and Southwest Airlines. Salesforce said Tableau will continue to operate independently under the Tableau brand with Selipsky and the rest of its current leadership team in charge. The company has 4,200 employees, though it's unclear whether they will all stay.",
+            "link": "https://cloud.iexapis.com/v1/news/article/31537511-b9ff-4cd9-a1ff-b17c3fc48f00",
+            "date": "2019-06-10T11:41:14Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/31537511-b9ff-4cd9-a1ff-b17c3fc48f00",
+            "source": "Business Insider",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "Billion Dollar Unicorn: Zoom's Success Story",
+            "description": "In 2011 Eric Yuan, a lead engineer from Cisco Systems, launched a videoconferencing software company called Zoom. Watch the video timeline to find out where the company stands today….ZM",
+            "link": "https://cloud.iexapis.com/v1/news/article/19bdc91a-f60f-4c0b-92d2-5d0cc10aea70",
+            "date": "2019-06-06T17:54:04Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/19bdc91a-f60f-4c0b-92d2-5d0cc10aea70",
+            "source": "The Street",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "Cisco Continues To Shine",
+            "description": "Cisco continues its impressive streak of beating estimates amid strong results.The company's transformation is still in full swing and keeps its strong momentum despite the flare-up in the trade war.T",
+            "link": "https://cloud.iexapis.com/v1/news/article/9b38fe36-6a41-48ea-841a-a0000a230c41",
+            "date": "2019-06-04T12:50:00Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/9b38fe36-6a41-48ea-841a-a0000a230c41",
+            "source": "Seeking Alpha",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "Cisco adds Northrop's Bush to board",
+            "description": "No summary available.",
+            "link": "https://cloud.iexapis.com/v1/news/article/e03e27fb-df80-4d47-a37e-ff36a8f73c32",
+            "date": "2019-05-22T20:41:07Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/e03e27fb-df80-4d47-a37e-ff36a8f73c32",
+            "source": "Seeking Alpha",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "AirAsia India to double its fleet; plans to start international services by October",
+            "description": "MUMBAI: Budget carrier AirAsia India is looking to double its fleet in the next 12-15 months as well as launch international operations by October, a senior official said.The Bengaluru-headquartered airline -- a joint venture between Tatas and Malaysia's AirAsia Berhad -- is eligible to fly overseas. Currently, it has a fleet of 21 A 320 planes.\"We are planning to double our capacity (fleet size) in the next 12-15 months, beginning May this year. We are planning to induct some fuel-efficient A320 neo planes as well in our fleet \" the official told PTI.AirAsia India, which started operations on June 12 2014, had a market share of 6.2 per cent of the domestic traffic in April.As part of expansion plans, AirAsia India is likely to launch international services by September-October with flights to destinations in South East Asia, including Malaysia and Thailand.\"After South East Asia, we plan to expand our operations to destinations such as Sri Lanka, Nepal and Bangladesh in the SAARC region and also to Japan, the Middle East and the Commonwealth of Independent States (CIS) region,\" the official said.SAARC is South Asian Association for Regional Cooperation.\"We are eligible to fly on overseas routes both by the earlier rules as well as the existing ones.",
+            "link": "https://cloud.iexapis.com/v1/news/article/762e2c33-1dea-4c7d-a32a-95168e726f43",
+            "date": "2019-05-22T15:05:53Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/762e2c33-1dea-4c7d-a32a-95168e726f43",
+            "source": "The Economic Times India",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "After Huawei, Trump’s Blacklist May Lead to a Global Tech Schism",
+            "description": "(Bloomberg Businessweek) -- Bluster is a key weapon in the trade war between the U.S. and China. So it’s natural to want to dismiss the latest salvo—a U.S. Department of Commerce ban on doing business with Chinese national champion technology company Huawei—as another short-term negotiation tactic of the Trump administration. Even if that’s what it is, however, the ramifications likely won’t stop with a trade resolution. If carried out to its full extent, the U.S. government’s blacklist could temporarily hobble Huawei Technologies Co., which relies on parts and software from American companies such as Qualcomm Inc. and Google to build and market the 200 million mobile phones it ships annually, plus the billions of dollars’ worth of networking gear it sells globally. But it could also disrupt the supply chain permanently. Alex Capri, a senior fellow at the Business School of the National University of Singapore and onetime U.S. customs official, puts it bluntly: “Long-held relationships between supplier networks and global ecosystems will fall apart,” he says. “Markets will fragment, and there will be a decoupling of China and the U.S. into two distinct tech supply chains.” It’s unclear how long the blacklist will last.",
+            "link": "https://cloud.iexapis.com/v1/news/article/5198ca54-6b37-4ff7-be74-b4f5462c5371",
+            "date": "2019-05-22T04:01:06Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/5198ca54-6b37-4ff7-be74-b4f5462c5371",
+            "source": "Bloomberg",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "Cisco: A Great Tech Stock For Dividend Growth Investors",
+            "description": "No summary available.",
+            "link": "https://cloud.iexapis.com/v1/news/article/7122d3bd-b811-40a7-94ee-d9c6e2715bcd",
+            "date": "2019-05-22T02:45:44Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/7122d3bd-b811-40a7-94ee-d9c6e2715bcd",
+            "source": "Seeking Alpha",
+            "lang": "en",
+            "hasPaywall": false
+          }
+        ]
+      },
+      "chart": {
+        "template": "line",
+        "palette": "office.Celestial6",
+        "configuration": {
+          "data": {
+            "labels": [
+              "09:30 AM",
+              "09:35 AM",
+              "09:40 AM",
+              "09:45 AM",
+              "09:50 AM",
+              "09:55 AM",
+              "10 AM",
+              "10:05 AM",
+              "10:10 AM",
+              "10:15 AM",
+              "10:20 AM",
+              "10:25 AM",
+              "10:30 AM",
+              "10:35 AM",
+              "10:40 AM",
+              "10:45 AM",
+              "10:50 AM",
+              "10:55 AM",
+              "11 AM",
+              "11:05 AM",
+              "11:10 AM"
+            ],
+            "datasets": [
+              {
+                "data": [
+                  56.95,
+                  57.2,
+                  57.12,
+                  57.295,
+                  57.405,
+                  57.475,
+                  57.44,
+                  57.315,
+                  57.29,
+                  57.11,
+                  57.24,
+                  57.325,
+                  57.36,
+                  57.26,
+                  57.27,
+                  57.27,
+                  57.21,
+                  57.19,
+                  57.11,
+                  57.255,
+                  57.285
+                ],
+                "fill": false
+              }
+            ]
+          },
+          "options": {
+            "legend": {
+              "display": false
+            },
+            "scales": {
+              "yAxes": [
+                {
+                  "position": "left",
+                  "ticks": {
+                    "beginAtZero": false
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "_settings": {}
+    }
+  preview-mode: live
+  preview-container: event
+  search-term: 
+  service-url: 
+  xclass: 
+  xstyle: 
+  code: |-
+    action.initialize = function (evt) {
+      window.setInterval(function () {
+        evt.connector.post({
+          args: {
+            atAgentAction: "refresh"
+          }
+        });
+      }.bind(this), 300000);
+    }
