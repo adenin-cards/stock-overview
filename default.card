@@ -73,6 +73,68 @@ properties:
     xtype: at-chart-core
     actionListeners:
       - _all
+    modelRoot: state.model.charts.oneDay
+    modelBind: 'hide: !show'
+    xclass: expanded-only
+  core7:
+    type: element
+    title: Charts 7
+    xtype: at-chart-core
+    actionListeners:
+      - _all
+    modelRoot: state.model.charts.oneMonth
+    modelBind: 'hide: !show'
+    hide: !!bool true
+    xclass: expanded-only
+  core8:
+    type: element
+    title: Charts 8
+    xtype: at-chart-core
+    modelRoot: state.model.charts.threeMonth
+    actionListeners:
+      - _all
+    modelBind: 'hide: !show'
+    hide: !!bool true
+    xclass: expanded-only
+  core9:
+    type: element
+    title: Charts 9
+    xtype: at-chart-core
+    actionListeners:
+      - _all
+    modelRoot: state.model.charts.sixMonth
+    modelBind: 'hide: !show'
+    hide: !!bool true
+    xclass: expanded-only
+  core10:
+    type: element
+    title: Charts 10
+    xtype: at-chart-core
+    actionListeners:
+      - _all
+    modelRoot: state.model.charts.yearToDate
+    modelBind: 'hide: !show'
+    hide: !!bool true
+    xclass: expanded-only
+  core11:
+    type: element
+    title: Charts 11
+    xtype: at-chart-core
+    modelRoot: state.model.charts.oneYear
+    actionListeners:
+      - _all
+    modelBind: 'hide: !show'
+    hide: !!bool true
+    xclass: expanded-only
+  core12:
+    type: element
+    title: Charts 12
+    xtype: at-chart-core
+    actionListeners:
+      - _all
+    modelRoot: state.model.charts.fiveYear
+    modelBind: 'hide: !show'
+    hide: !!bool true
     xclass: expanded-only
   view6:
     type: element
