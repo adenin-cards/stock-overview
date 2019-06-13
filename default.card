@@ -60,6 +60,7 @@ properties:
           <at-carbon-moment class="mlsm text-secondary font-caption" datetime="{{ quote.date }}" from-now ago auto-refresh></at-carbon-moment>
         </div>
       </div>
+      <div class="bb mb expanded-only"></div>
     xgridcols: 12
     xstyle: 
     xclass: 
@@ -74,84 +75,60 @@ properties:
     actionListeners:
       - _all
     modelRoot: state.model.charts.oneDay
-    modelBind: 'hide: !show'
-    xclass: expanded-only
-  core7:
-    type: element
-    title: Charts 7
-    xtype: at-chart-core
-    actionListeners:
-      - _all
-    modelRoot: state.model.charts.oneMonth
-    modelBind: 'hide: !show'
-    hide: !!bool true
-    xclass: expanded-only
-  core8:
-    type: element
-    title: Charts 8
-    xtype: at-chart-core
-    modelRoot: state.model.charts.threeMonth
-    actionListeners:
-      - _all
-    modelBind: 'hide: !show'
-    hide: !!bool true
-    xclass: expanded-only
-  core9:
-    type: element
-    title: Charts 9
-    xtype: at-chart-core
-    actionListeners:
-      - _all
-    modelRoot: state.model.charts.sixMonth
-    modelBind: 'hide: !show'
-    hide: !!bool true
-    xclass: expanded-only
-  core10:
-    type: element
-    title: Charts 10
-    xtype: at-chart-core
-    actionListeners:
-      - _all
-    modelRoot: state.model.charts.yearToDate
-    modelBind: 'hide: !show'
-    hide: !!bool true
-    xclass: expanded-only
-  core11:
-    type: element
-    title: Charts 11
-    xtype: at-chart-core
-    modelRoot: state.model.charts.oneYear
-    actionListeners:
-      - _all
-    modelBind: 'hide: !show'
-    hide: !!bool true
-    xclass: expanded-only
-  core12:
-    type: element
-    title: Charts 12
-    xtype: at-chart-core
-    actionListeners:
-      - _all
-    modelRoot: state.model.charts.fiveYear
-    modelBind: 'hide: !show'
-    hide: !!bool true
+    modelBind: 'hidden: !show'
     xclass: expanded-only
   view6:
     type: element
     title: Liquid View 6
     xtype: at-core-view
     view: |-
-      <div class="bb mx my expanded-only"></div>
-      <div class="mx my expanded-only font-title">Market News</div>
-    modelRoot: state.model
-  vlist4:
-    type: element
-    xtype: at-core-vlist
+      <div class="bb"></div>
+      <div class="layout-horizontal pb ptsm pxsm chart-range-selector-container layout-around-justified">
+      	<div class="psm chart-range-selector-active">
+        	1D
+        </div>
+        <div class="psm blue chart-range-selector">
+        	1M
+        </div>
+        <div class="psm blue chart-range-selector">
+        	3M
+        </div>
+        <div class="psm blue chart-range-selector">
+        	6M
+        </div>
+        <div class="psm blue chart-range-selector">
+        	YTD
+        </div>
+        <div class="psm blue chart-range-selector">
+        	1Y
+        </div>
+        <div class="psm blue chart-range-selector">
+        	5Y
+        </div>
+      </div>
+      {% if items.length > 0 %}
+      	<div class="bb mb"></div>
+      	<div class="mx mt mbsm grey font-title">HEADLINES</div>
+      	<div class="layout-vertical mx mb">
+      		{% for item in items | limit: 3 %}
+      			<a target="_blank" href="{{ item.link }}" class="blue mysm">{{ item.title }}</a>
+        	{% endfor %}
+      	</div>
+      {% endif %}
+
+      <style>
+      	.chart-range-selector-container {
+        	background-color: #f8f8f8;
+        }
+        
+        .chart-range-selector-active,
+        .chart-range-selector:hover {
+          color: #005073 !important;
+        	border-bottom: 3px solid #005073;
+          margin-bottom: -3px;
+        }
+      </style>
     modelRoot: state.model.news
-    listHeight: 300px
-    itemComponent: stock-overview/stock-overview-item-card
-    actionListeners:
-      - _all
     xclass: expanded-only
   footer4:
     type: element
@@ -166,48 +143,98 @@ $meta:
       "quote": {
         "symbol": "CSCO",
         "companyName": "Cisco Systems, Inc.",
-        "calculationPrice": "tops",
-        "open": 56.82,
-        "openTime": 1560259800554,
-        "close": 56.42,
-        "closeTime": 1560196800175,
-        "high": 57.56,
-        "low": 56.73,
-        "latestPrice": 57.255,
-        "latestSource": "IEX real time price",
-        "latestTime": "11:11:18 AM",
-        "latestUpdate": 1560265878991,
-        "latestVolume": 8604748,
-        "iexRealtimePrice": 57.255,
-        "iexRealtimeSize": 17,
-        "iexLastUpdated": 1560265878991,
-        "delayedPrice": 57.2,
-        "delayedPriceTime": 1560264983848,
-        "extendedPrice": 56.82,
-        "extendedChange": -0.435,
-        "extendedChangePercent": -0.0076,
-        "extendedPriceTime": 1560259800442,
-        "previousClose": 56.42,
-        "change": 0.835,
-        "changePercent": 0.0148,
-        "iexMarketPercent": 0.024761561872584763,
-        "iexVolume": 213067,
-        "avgTotalVolume": 22289737,
-        "iexBidPrice": 57.25,
-        "iexBidSize": 200,
-        "iexAskPrice": 58.48,
-        "iexAskSize": 100,
-        "marketCap": 245093196150,
-        "peRatio": 19.61,
+        "calculationPrice": "close",
+        "open": 56.05,
+        "openTime": 1560346200802,
+        "close": 55.86,
+        "closeTime": 1560369600553,
+        "high": 56.585,
+        "low": 55.65,
+        "latestPrice": 55.86,
+        "latestSource": "Close",
+        "latestTime": "June 12, 2019",
+        "latestUpdate": 1560369600553,
+        "latestVolume": 16180,
+        "iexRealtimePrice": 0,
+        "iexRealtimeSize": 0,
+        "iexLastUpdated": 0,
+        "delayedPrice": 55.86,
+        "delayedPriceTime": 1560370500010,
+        "extendedPrice": 56.14,
+        "extendedChange": 0.28,
+        "extendedChangePercent": 0.00501,
+        "extendedPriceTime": 1560424644055,
+        "previousClose": 57.11,
+        "change": -1.25,
+        "changePercent": -0.02189,
+        "iexMarketPercent": null,
+        "iexVolume": 0,
+        "avgTotalVolume": 22716447,
+        "iexBidPrice": 0,
+        "iexBidSize": 0,
+        "iexAskPrice": 0,
+        "iexAskSize": 0,
+        "marketCap": 239121577800,
+        "peRatio": 19.13,
         "week52High": 57.56,
         "week52Low": 40.25,
-        "ytdChange": 0.32842,
-        "date": "2019-06-11T15:11:18.991Z"
+        "ytdChange": 0.278692,
+        "date": "2019-06-12T20:00:00.553Z"
       },
       "news": {
         "_page": 1,
         "_pageSize": 99,
         "items": [
+          {
+            "title": "Johnson & Johnson and Cisco Directors Are Buying Up Stock",
+            "description": "Lockheed CEO Marillyn Hewson made the first insider purchase of J&J stock this year, while Northrop Grumman Chairman Wes Bush bought up Cisco stock.",
+            "link": "https://cloud.iexapis.com/v1/news/article/ce521175-0635-4291-8108-fd1d4e35b676",
+            "date": "2019-06-13T11:00:00Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/ce521175-0635-4291-8108-fd1d4e35b676",
+            "source": "Barron's",
+            "lang": "en",
+            "hasPaywall": true
+          },
+          {
+            "title": "Cisco Systems, Cimarex Energy, PaySign: 'Mad Money' Lightning Round",
+            "description": "Jim Cramer takes a closer look at Cisco Systems, Cimarex Energy, PaySign, Citizens Financial Group, AMC Networks and more….CFG",
+            "link": "https://cloud.iexapis.com/v1/news/article/b708ad89-4216-4420-b9ef-adecff7da780",
+            "date": "2019-06-13T00:42:04Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/b708ad89-4216-4420-b9ef-adecff7da780",
+            "source": "The Street",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "Here's Why Cisco Systems (CSCO) is a Great Momentum Stock to Buy",
+            "description": "Does Cisco Systems (CSCO) have what it takes to be a top stock pick for momentum investors? Let's find out.",
+            "link": "https://cloud.iexapis.com/v1/news/article/d30c33aa-0a70-49b5-a9e9-07b0ef2c0381",
+            "date": "2019-06-12T14:00:07Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/d30c33aa-0a70-49b5-a9e9-07b0ef2c0381",
+            "source": "Zacks Investment Research",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "Cisco (CSCO) Hits 52-Week High, Can the Run Continue?",
+            "description": "Cisco (CSCO) is at a 52-week high, but can investors hope for more gains in the future? We take a look at the company's fundamentals for clues.",
+            "link": "https://cloud.iexapis.com/v1/news/article/0da76b94-0e0c-4d14-b433-d0df8cb0e845",
+            "date": "2019-06-12T13:25:02Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/0da76b94-0e0c-4d14-b433-d0df8cb0e845",
+            "source": "Zacks Investment Research",
+            "lang": "en",
+            "hasPaywall": false
+          },
+          {
+            "title": "The Zacks Analyst Blog Highlights: Dell, Lenovo, Cisco and Hewlett Packard",
+            "description": "The Zacks Analyst Blog Highlights: Dell, Lenovo, Cisco and Hewlett Packard",
+            "link": "https://cloud.iexapis.com/v1/news/article/9b5c8a4d-3517-4448-9399-19fa6eba6f7b",
+            "date": "2019-06-11T16:03:00Z",
+            "thumbnail": "https://cloud.iexapis.com/v1/news/image/9b5c8a4d-3517-4448-9399-19fa6eba6f7b",
+            "source": "Zacks Investment Research",
+            "lang": "en",
+            "hasPaywall": false
+          },
           {
             "title": "Intel is buying Barefoot Networks, a challenger to Cisco that had raised over $150 million from giants like Google and Alibaba (INTC, CSCO, AVGO)",
             "description": "Intel is buying Barefoot Networks, a Silicon Valley startup with over $150 million in funding. Terms of the deal were not disclosed. Barefoot Networks sells networking equipment, with its main differentiator being that developers can write code for its hardware that runs directly on the processor — a technical, but important, difference that allows for more customization than you often find on Cisco or Broadcom gear. The deal comes as Intel faces new challenges, as its data center revenues recently faltered for the first time in a long time. Visit Business Insider's homepage for more stories. Intel is acquiring Barefoot Networks, a Silicon Valley startup that had raised over $150 million from giants like Google , Dell Technologies Capital, Alibaba , and Goldman Sachs. Terms of the deal weren't disclosed, but Intel says that Dr. Craig Barratt, the CEO, and his team will be joining the chip giant after the deal closes, which it expects will happen in the third quarter of 2019. \"Upon close, the addition of Barefoot Networks will support our focus on end-to-end cloud networking and infrastructure leadership, and will allow Intel to continue to deliver on new workloads, experiences and capabilities for our data center customers,\" Intel data center boss Navin Shenoy said in a blog entry announcing the deal .",
@@ -257,62 +284,13 @@ $meta:
             "source": "The Street",
             "lang": "en",
             "hasPaywall": false
-          },
-          {
-            "title": "Cisco Continues To Shine",
-            "description": "Cisco continues its impressive streak of beating estimates amid strong results.The company's transformation is still in full swing and keeps its strong momentum despite the flare-up in the trade war.T",
-            "link": "https://cloud.iexapis.com/v1/news/article/9b38fe36-6a41-48ea-841a-a0000a230c41",
-            "date": "2019-06-04T12:50:00Z",
-            "thumbnail": "https://cloud.iexapis.com/v1/news/image/9b38fe36-6a41-48ea-841a-a0000a230c41",
-            "source": "Seeking Alpha",
-            "lang": "en",
-            "hasPaywall": false
-          },
-          {
-            "title": "Cisco adds Northrop's Bush to board",
-            "description": "No summary available.",
-            "link": "https://cloud.iexapis.com/v1/news/article/e03e27fb-df80-4d47-a37e-ff36a8f73c32",
-            "date": "2019-05-22T20:41:07Z",
-            "thumbnail": "https://cloud.iexapis.com/v1/news/image/e03e27fb-df80-4d47-a37e-ff36a8f73c32",
-            "source": "Seeking Alpha",
-            "lang": "en",
-            "hasPaywall": false
-          },
-          {
-            "title": "AirAsia India to double its fleet; plans to start international services by October",
-            "description": "MUMBAI: Budget carrier AirAsia India is looking to double its fleet in the next 12-15 months as well as launch international operations by October, a senior official said.The Bengaluru-headquartered airline -- a joint venture between Tatas and Malaysia's AirAsia Berhad -- is eligible to fly overseas. Currently, it has a fleet of 21 A 320 planes.\"We are planning to double our capacity (fleet size) in the next 12-15 months, beginning May this year. We are planning to induct some fuel-efficient A320 neo planes as well in our fleet \" the official told PTI.AirAsia India, which started operations on June 12 2014, had a market share of 6.2 per cent of the domestic traffic in April.As part of expansion plans, AirAsia India is likely to launch international services by September-October with flights to destinations in South East Asia, including Malaysia and Thailand.\"After South East Asia, we plan to expand our operations to destinations such as Sri Lanka, Nepal and Bangladesh in the SAARC region and also to Japan, the Middle East and the Commonwealth of Independent States (CIS) region,\" the official said.SAARC is South Asian Association for Regional Cooperation.\"We are eligible to fly on overseas routes both by the earlier rules as well as the existing ones.",
-            "link": "https://cloud.iexapis.com/v1/news/article/762e2c33-1dea-4c7d-a32a-95168e726f43",
-            "date": "2019-05-22T15:05:53Z",
-            "thumbnail": "https://cloud.iexapis.com/v1/news/image/762e2c33-1dea-4c7d-a32a-95168e726f43",
-            "source": "The Economic Times India",
-            "lang": "en",
-            "hasPaywall": false
-          },
-          {
-            "title": "After Huawei, Trump’s Blacklist May Lead to a Global Tech Schism",
-            "description": "(Bloomberg Businessweek) -- Bluster is a key weapon in the trade war between the U.S. and China. So it’s natural to want to dismiss the latest salvo—a U.S. Department of Commerce ban on doing business with Chinese national champion technology company Huawei—as another short-term negotiation tactic of the Trump administration. Even if that’s what it is, however, the ramifications likely won’t stop with a trade resolution. If carried out to its full extent, the U.S. government’s blacklist could temporarily hobble Huawei Technologies Co., which relies on parts and software from American companies such as Qualcomm Inc. and Google to build and market the 200 million mobile phones it ships annually, plus the billions of dollars’ worth of networking gear it sells globally. But it could also disrupt the supply chain permanently. Alex Capri, a senior fellow at the Business School of the National University of Singapore and onetime U.S. customs official, puts it bluntly: “Long-held relationships between supplier networks and global ecosystems will fall apart,” he says. “Markets will fragment, and there will be a decoupling of China and the U.S. into two distinct tech supply chains.” It’s unclear how long the blacklist will last.",
-            "link": "https://cloud.iexapis.com/v1/news/article/5198ca54-6b37-4ff7-be74-b4f5462c5371",
-            "date": "2019-05-22T04:01:06Z",
-            "thumbnail": "https://cloud.iexapis.com/v1/news/image/5198ca54-6b37-4ff7-be74-b4f5462c5371",
-            "source": "Bloomberg",
-            "lang": "en",
-            "hasPaywall": false
-          },
-          {
-            "title": "Cisco: A Great Tech Stock For Dividend Growth Investors",
-            "description": "No summary available.",
-            "link": "https://cloud.iexapis.com/v1/news/article/7122d3bd-b811-40a7-94ee-d9c6e2715bcd",
-            "date": "2019-05-22T02:45:44Z",
-            "thumbnail": "https://cloud.iexapis.com/v1/news/image/7122d3bd-b811-40a7-94ee-d9c6e2715bcd",
-            "source": "Seeking Alpha",
-            "lang": "en",
-            "hasPaywall": false
           }
         ]
       },
+      "charts": {},
       "chart": {
         "template": "line",
-        "palette": "office.Celestial6",
+        "palette": "office.Capital6",
         "configuration": {
           "data": {
             "labels": [
@@ -336,32 +314,146 @@ $meta:
               "10:55 AM",
               "11 AM",
               "11:05 AM",
-              "11:10 AM"
+              "11:10 AM",
+              "11:15 AM",
+              "11:20 AM",
+              "11:25 AM",
+              "11:30 AM",
+              "11:35 AM",
+              "11:40 AM",
+              "11:45 AM",
+              "11:50 AM",
+              "11:55 AM",
+              "12 PM",
+              "12:05 PM",
+              "12:10 PM",
+              "12:15 PM",
+              "12:20 PM",
+              "12:25 PM",
+              "12:30 PM",
+              "12:35 PM",
+              "12:40 PM",
+              "12:45 PM",
+              "12:50 PM",
+              "12:55 PM",
+              "1 PM",
+              "1:05 PM",
+              "1:10 PM",
+              "1:15 PM",
+              "1:20 PM",
+              "1:25 PM",
+              "1:30 PM",
+              "1:35 PM",
+              "1:40 PM",
+              "1:45 PM",
+              "1:50 PM",
+              "1:55 PM",
+              "2 PM",
+              "2:05 PM",
+              "2:10 PM",
+              "2:15 PM",
+              "2:20 PM",
+              "2:25 PM",
+              "2:30 PM",
+              "2:35 PM",
+              "2:40 PM",
+              "2:45 PM",
+              "2:50 PM",
+              "2:55 PM",
+              "3 PM",
+              "3:05 PM",
+              "3:10 PM",
+              "3:15 PM",
+              "3:20 PM",
+              "3:25 PM",
+              "3:30 PM",
+              "3:35 PM",
+              "3:40 PM",
+              "3:45 PM",
+              "3:50 PM",
+              "3:55 PM"
             ],
             "datasets": [
               {
                 "data": [
-                  56.95,
-                  57.2,
-                  57.12,
-                  57.295,
-                  57.405,
-                  57.475,
-                  57.44,
-                  57.315,
-                  57.29,
-                  57.11,
-                  57.24,
-                  57.325,
-                  57.36,
-                  57.26,
-                  57.27,
-                  57.27,
-                  57.21,
-                  57.19,
-                  57.11,
-                  57.255,
-                  57.285
+                  56.32,
+                  56.335,
+                  56.45,
+                  56.38,
+                  56.415,
+                  56.44,
+                  56.51,
+                  56.5,
+                  56.39,
+                  56.365,
+                  56.395,
+                  56.355,
+                  56.3,
+                  56.33,
+                  56.395,
+                  56.375,
+                  56.41,
+                  56.37,
+                  56.32,
+                  56.26,
+                  56.29,
+                  56.21,
+                  56.12,
+                  56.19,
+                  56.195,
+                  56.13,
+                  56.11,
+                  56.17,
+                  56.21,
+                  56.13,
+                  56.09,
+                  55.995,
+                  55.98,
+                  55.915,
+                  55.865,
+                  55.985,
+                  56.04,
+                  56.055,
+                  56.035,
+                  56.005,
+                  55.93,
+                  55.845,
+                  55.81,
+                  55.8,
+                  55.725,
+                  55.71,
+                  55.71,
+                  55.705,
+                  55.74,
+                  55.74,
+                  55.705,
+                  55.705,
+                  55.73,
+                  55.725,
+                  55.725,
+                  55.665,
+                  55.725,
+                  55.785,
+                  55.735,
+                  55.71,
+                  55.765,
+                  55.805,
+                  55.875,
+                  55.94,
+                  55.95,
+                  55.94,
+                  55.89,
+                  55.875,
+                  55.915,
+                  55.9,
+                  55.895,
+                  55.86,
+                  55.87,
+                  55.86,
+                  55.825,
+                  55.79,
+                  55.795,
+                  55.795
                 ],
                 "fill": false
               }
