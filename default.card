@@ -79,12 +79,20 @@ properties:
     view: |-
       <div class="bb"></div>
       <div class="layout-horizontal pb ptsm pxsm chart-range-selector-container layout-around-justified">
-      	<div class="psm chart-range-selector-active" id="oneDay" at-click-action="switchChart">
-        	1D
-        </div>
-        <div class="psm blue chart-range-selector" id="oneMonth" at-click-action="switchChart">
-        	1M
-        </div>
+      	{% if charts.oneDay %}
+      		<div class="psm chart-range-selector-active" id="oneDay" at-click-action="switchChart">
+      			1D
+      		</div>
+      	{% endif %}
+      	{% if charts.oneMonth.show %}
+      		<div class="psm chart-range-selector-active" id="oneMonth" at-click-action="switchChart">
+      			1M
+      		</div>
+      	{% else %}
+      		<div class="psm blue chart-range-selector" id="oneMonth" at-click-action="switchChart">
+      			1M
+      		</div>
+      	{% endif %}
         <div class="psm blue chart-range-selector" id="threeMonth" at-click-action="switchChart">
         	3M
         </div>
@@ -101,11 +109,11 @@ properties:
         	5Y
         </div>
       </div>
-      {% if items.length > 0 %}
+      {% if news.items.length > 0 %}
       	<div class="bb mb"></div>
       	<div class="mx mt mbsm grey font-body1">HEADLINES</div>
       	<div class="layout-vertical mx mb">
-      		{% for item in items | limit: 3 %}
+      		{% for item in news.items | limit: 3 %}
       			<a target="_blank" href="{{ item.link }}" class="blue mysm stock-headline-anchor">{{ item.title }}</a>
         	{% endfor %}
       	</div>
@@ -130,7 +138,7 @@ properties:
         	text-decoration: underline;
         }
       </style>
-    modelRoot: state.model.news
+    modelRoot: state.model
     xclass: expanded-only
     actionListeners:
       - _start
@@ -6091,29 +6099,28 @@ $meta:
             atAgentAction: "refresh"
           }
         });
-        
+
         var oldKey;
         
         Object.keys(state.model.charts).forEach(function (key) {
-        	if (state.model.charts.hasOwnProperty(key) && state.model.charts[key].show == true) oldKey = key;
+        	if (state.model.charts.hasOwnProperty(key) && state.model.charts[key].show == true && key != 'current') oldKey = key;
       	});
         
-        if (oldKey != 'oneDay') {
-          state.model.charts.current = state.model.charts.oneDay;
-        	
-          state.model.charts.oneDay.show = true;
+        if (oldKey != state.model.charts.initialKey) {
+          state.model.charts.current = state.model.charts[state.model.charts.initialKey];
+          state.model.charts[state.model.charts.initialKey].show = true;
           state.model.charts[oldKey].show = false;
           
-          switchTabs(oldKey, 'oneDay');
+          switchTabs(oldKey, state.model.charts.initialKey);
         }
-      }.bind(this), 300000);
+      }.bind(this), 30000);
     }
 
     action.switchChart = function (state) {
       var oldKey;
       
       Object.keys(state.model.charts).forEach(function (key) {
-        if (state.model.charts.hasOwnProperty(key) && state.model.charts[key].show == true) oldKey = key;
+        if (state.model.charts.hasOwnProperty(key) && state.model.charts[key].show == true && key != 'current') oldKey = key;
       });
       
       if (oldKey == state.args.id) return;
