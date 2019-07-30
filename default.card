@@ -6094,25 +6094,18 @@ $meta:
 
     action.initialize = function (state) {
       window.setInterval(function () {
-        state.connector.post({
-          args: {
-            atAgentAction: "refresh"
-          }
-        });
-
-        var oldKey;
+        var selectedKey;
         
         Object.keys(state.model.charts).forEach(function (key) {
-        	if (state.model.charts.hasOwnProperty(key) && state.model.charts[key].show == true && key != 'current') oldKey = key;
+        	if (state.model.charts.hasOwnProperty(key) && state.model.charts[key].show == true && key != 'current') selectedKey = key;
       	});
         
-        if (oldKey != state.model.charts.initialKey) {
-          state.model.charts.current = state.model.charts[state.model.charts.initialKey];
-          state.model.charts[state.model.charts.initialKey].show = true;
-          state.model.charts[oldKey].show = false;
-          
-          switchTabs(oldKey, state.model.charts.initialKey);
-        }
+        state.connector.post({
+          args: {
+            atAgentAction: "refresh",
+            selected: selectedKey
+          }
+        });
       }.bind(this), 30000);
     }
 
