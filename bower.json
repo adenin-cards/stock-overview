@@ -1,6 +1,6 @@
 {
   "name": "stock-overview",
-  "version": "0.0.1.136",
+  "version": "0.0.1.158",
   "private": true,
   "dependencies": {
     "polymer": "Polymer/polymer#master"
